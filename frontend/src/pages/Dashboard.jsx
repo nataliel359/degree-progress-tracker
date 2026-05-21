@@ -21,11 +21,56 @@ export default function Dashboard() {
 
     if (!data) return <div>Loading...</div>;
 
+    const overallRequired = data.major.summary.total_required + data.minor.summary.total_required;
+    const overallCompleted = data.major.summary.total_completed + data.minor.summary.total_completed;
+    const overallPercent = Math.round((overallCompleted / overallRequired) * 100);
+
     return (
         <div className="dashboard">
-            <h1>{data.student}</h1>
-            <ProgramSection title="Computer Science Major" data={data.major} />
-            <ProgramSection title="Business Minor" data={data.minor} />
+            {/* HERO */}
+            <div className="student-hero">
+                <div className="student-info">
+                    <div className="avatar">
+                        {data.student.charAt(0)}
+                    </div>
+                    <div>
+                        <h1>{data.student}</h1>
+                        <p className="student-meta">Honours Bachelor of Science - Computer Science Major / Business Minor</p>
+                        <p className="student-meta">Lassonde School of Engineering</p>
+                        <p className="student-meta">Student ID: 202319845</p>
+                    </div>
+                </div>
+                <div className="overall-progress-card">
+                    <div className="overall-percent">
+                        <p>Overall Progress</p>
+                        <p>{overallPercent}%</p>
+                        <a href="https://registrar.yorku.ca/graduation/apply" className="convocation-link">Apply for Convocation</a>
+                    </div>
+                </div>
+                
+            </div>
+
+            {/* LEFT CONTENT */}
+            <div className="main-content">
+                {/* PROGRAM SECTIONS */}
+                <ProgramSection title="Computer Science Major" data={data.major} />
+                <ProgramSection title="Business Minor" data={data.minor} />
+            </div>
+
+            {/* RIGHT SIDEBAR */}
+            <div className="sidebar">
+                <div className="sidebar-card">
+                    <h3>Useful Links</h3>
+                    <div className="link-list">
+                        <a href="https://students.yorku.ca/myonlineservices" className="small-badge">Online Services</a><br />
+                        <a href="https://students.yorku.ca/york-gpa-calculator" className="small-badge">GPA Calculator</a><br />
+                        {/* <a href="https://lassonde.yorku.ca/student-life/connect-with-an-academic-advisor" className="small-badge">Connect with an Advisor</a>
+                        <a href="https://lassonde.yorku.ca/co-op/" className="small-badge">Co-op Info</a> */}
+                        <a href="https://myacademicrecord.students.yorku.ca/program-change" className="small-badge">Degree Change Request</a><br />
+                        <a href="https://students.yorku.ca/sfs/scholarships-awards-bursaries" className="small-badge">Awards Search</a>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
