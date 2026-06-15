@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ### 2. Run backend server
 From the backend/ directory:
 
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 
 Backend runs at:
 
