@@ -39,8 +39,11 @@ pip install -r requirements.txt
 ### 2. Run backend server
 From the backend/ directory:
 
+<<<<<<< HEAD
 .\venv\Scripts\Activate.ps1
 
+=======
+>>>>>>> 53a112b8227f695ae59f1e51056cb26979391610
 uvicorn app.main:app --reload
 
 Backend runs at:
