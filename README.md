@@ -39,7 +39,9 @@ pip install -r requirements.txt
 ### 2. Run backend server
 From the backend/ directory:
 
-uvicorn main:app --reload
+.\venv\Scripts\Activate.ps1
+
+uvicorn app.main:app --reload
 
 Backend runs at:
 
@@ -79,6 +81,8 @@ export async function getProgress() {
 }
 
 ### 3. Run frontend
+.\venv\Scripts\Activate.ps1 (if not already done from the backend)
+
 npm run dev
 
 OR (if Create React App):

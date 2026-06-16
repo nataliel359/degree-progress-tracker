@@ -68,7 +68,7 @@ body {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: #2563eb;
+    background: #de0a26;
     color: white;
     display: flex;
     align-items: center;
@@ -87,28 +87,28 @@ body {
 }
 
 .overall-percent {
-    background: #eff6ff;
-    border: 2px solid #bfdbfe;
+    background: #ffcbd1;
+    border: 2px solid #f69697;
     border-radius: 20px;
     padding: 24px;
     text-align: center;
     min-width: 220px;
     font-size: 42px;
     font-weight: 700;
-    color: #1d4ed8;
+    color: #ff2c2c;
     margin-bottom: 8px;
 }
 
 .convocation-link {
     display: inline-block;
     margin-top: 16px;
-    color: #1d4ed8;
+    color: #ff2c2c;
 }
 
 .convocation-link:hover {
     border: 12px;
     border-radius: 12px;
-    color: #15803d;
+    color: #1d4ed8;
 }
 
 .sidebar-card {
@@ -131,14 +131,14 @@ body {
 }
 
 .link-list a {
-    color: #2563eb;
+    color: #f01e2c;
     text-decoration: none;
     font-weight: 500;
     transition: 0.2s;
 }
 
 .link-list a:hover {
-    background: lightblue;
+    background: lightpink;
 }
 
 .program-card {
@@ -166,7 +166,7 @@ body {
 }
 
 .percent-badge {
-    background: #2563eb;
+    background: #de0a26;
     color: white;
     width: 80px;
     height: 80px;
@@ -190,7 +190,7 @@ body {
 .progress-fill {
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    background: linear-gradient(90deg, #15803d, #22c55e);
     transition: width 0.4s ease;
 }
 
@@ -223,8 +223,8 @@ body {
 }
 
 .small-badge {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: #ffcbd1;
+    color: #ff2c2c;
     padding: 10px 16px;
     border-radius: 999px;
     font-size: 14px;
