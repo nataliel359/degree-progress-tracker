@@ -1,27 +1,47 @@
 # 🎓 Degree Progress Tracker
-A full-stack web application that tracks a student's academic progress across a Computer Science Major and Business Minor. It calculates completed credits, missing requirements, and visualizes degree progress in an interactive dashboard.
+A full-stack web application that tracks a student's academic progress across multiple degree programs. It calculates completed credits, missing requirements, and visualizes degree progress in an interactive dashboard.
 
 ---
 
 ## 🚀 Features
-- Tracks completed vs missing courses
-- Separates requirements by category (required, electives, gen-ed, science breadth)
-- Calculates credit totals and progress percentage
-- REST API built with FastAPI
-- Interactive React dashboard
-- Mock data for student and degree programs
+- Student degree progress dashboard
+- Multi-degree program tracking
+- Completed nd missing course views
+- Overall progress calculation
+- Login page with JWT authentication
+- Protected dashboard route
+- Logout support
+- PostgreSQL-backend user model
 
 ---
 
 ## 🏗️ Tech Stack
+
 ### Backend
 - Python
 - FastAPI
+- SQLAlchemy
 - Uvicorn
 ### Frontend
 - React
 - JavaScript
 - CSS
+### Database
+- PostgreSQl
+### Authentication
+- JWT access tokens
+- bcrypt password hashing
+
+---
+
+## Environment Variables
+
+Create a `.env` file inside `backend/`:
+
+DATABASE_URL=postgresql://postgres:your_password@localhost:5432/degree_progress
+JWT_SECRET_KEY=replace_with_a_long_random_secret
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=5
 
 ---
 
@@ -50,7 +70,7 @@ http://127.0.0.1:8000
 ### 3. Test API
 Open in browser or Postman:
 
-GET http://127.0.0.1:8000/progress
+http://127.0.0.1:8000/progress
 
 Expected response:
 
@@ -59,6 +79,10 @@ Expected response:
   "major": { ... },
   "minor": { ... }
 }
+
+and API docs are available at:
+
+http://127.0.0.1:8000/docs
 
 ---
 
@@ -69,18 +93,7 @@ From the frontend/ folder:
 
 npm install
 
-### 2. Configure API
-Make sure your frontend calls the backend correctly:
-
-export async function getProgress() {
-
-    const res = await fetch("http://127.0.0.1:8000/progress");
-    
-    return res.json();
-    
-}
-
-### 3. Run frontend
+### 2. Run frontend
 .\venv\Scripts\Activate.ps1 (if not already done from the backend)
 
 npm run dev
@@ -89,62 +102,85 @@ OR (if Create React App):
 
 npm start
 
-### 4. Open in browser
+### 3. Open in browser
 http://localhost:3000
 
 ---
 
-## 🔄 How It Works
+## 🗝️ Authentication Flow
 
-1. Backend generates mock student + degree data
-2. /progress endpoint computes:
-    - Completed courses
-    - Missing courses
-    - Credit totals per category
-3. Frontend fetches API data on load
-4. Dashboard renders:
-    - Major & minor progress
-    - Progress bars
-    - Completed vs missing courses
+1. Register a user through `POST /auth/register/`
+2. Log in through `POST /auth/login`
+3. The backend returns a JWT access token
+4. The frontend stores the token in `localStorage`
+5. Axios attaches the token to protected requests using the `Authorization` header
+6. Protected pages redirect unauthenticated users to `/login`
+7. Logout removes the token and returns the user to the login page
 
 ---
 
-## 📊 API Overview
+## 📊 API Endpoints
 
-### GET /progress
+### Auth
 
-Returns:
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | `/auth/register` | Create a new user account |
+| POST | `/auth/login` | Log in and receive a JWT |
+| GET | `/auth/me` | Get the current authenticated user |
 
-    - Student name
-    - Major progress object
-    - Minor progress object
-Each program includes:
+### Progress
 
-    - Summary (total credits, completion %, remaining credits)
-    - Requirements breakdown:
-        - required
-        - electives
-        - gen_ed
-        - science_breadth
-    - Completed courses
-    - Missing courses
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| GET | `/progress` | Get the authenticated student's progress report |
 
 ---
 
 ## ⚠️ Notes
-    - Uses mock data (no database yet)
-    - CORS enabled for all origins
-    - Backend must be running before frontend fetch works
+
+### Database
+The current database work includes a `users` table for authentication.
+
+Recommended future tables:
+
+- students
+- courses
+- degrees
+- degree_requirements
+- student_completed_courses
+
+The dashboard currently still uses mock academic progress data. A future improvement is to connect `/progress` to real student/course records from PostgreSQL.
+
+### UI
+The frontend includes:
+
+- A login page styled after the provided UI mockups
+- A protected dashboard page
+- A red gradient student hero section
+- Program progress cards
+- Completed and missing course lists
+
+---
+
+## Known Limitations
+
+- Academic progress data is currently mock data.
+- JWT tokens are stored in `localStorage`; production apps should consider HttpOnly secure cookies.
+- Database migrations are not yet configured with Alembic.
+- Password reset and email verification are not implemented.
 
 ---
 
 ## 🧠 Future Improvements
-    - Add PostgreSQL database
-    - User authentication
-    - Real course input system
-    - Degree requirement editor
-    - Export progress as PDF
-    - Persistent user data
+
+- Replace mock data with PostgreSQL-backed student records
+- Add Alembic migrations
+- Add role-based access for students, advisors, and admins
+- Add registration page in the frontend
+- Add password reset flow
+- Add tests for auth and protected routes
+- Deploy backend and frontend
 
 ---
 
