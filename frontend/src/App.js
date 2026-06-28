@@ -1,7 +1,29 @@
-import Dashboard from './pages/Dashboard';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+import { AuthProvider } from "./auth/AuthContext";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 function App() {
-  return <Dashboard />;
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  )
 }
 
 export default App;

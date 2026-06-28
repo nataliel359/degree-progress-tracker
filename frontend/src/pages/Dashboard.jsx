@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { getProgress } from "../api/client";
 import "../styles/Dashboard.css";
 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
+
 export default function Dashboard() {
     const [data, setData] = useState(null);
+    const navigate = useNavigate();
+    const { logout } = useAuth();
 
     useEffect(() => {
         fetchProgress();
@@ -17,6 +22,11 @@ export default function Dashboard() {
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
     };
 
     if (!data) return <div>Loading...</div>;
@@ -45,9 +55,9 @@ export default function Dashboard() {
                         <p>Overall Progress</p>
                         <p>{overallPercent}%</p>
                         <a href="https://registrar.yorku.ca/graduation/apply" className="convocation-link">Apply for Convocation</a>
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
-                
             </div>
 
             {/* LEFT CONTENT */}
