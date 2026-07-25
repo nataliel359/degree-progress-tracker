@@ -27,7 +27,7 @@ A full-stack web application that tracks a student's academic progress across mu
 - JavaScript
 - CSS
 ### Database
-- PostgreSQl
+- PostgreSQL
 ### Authentication
 - JWT access tokens
 - bcrypt password hashing
