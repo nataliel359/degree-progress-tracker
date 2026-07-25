@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/degress-progress-tracker/static/css/main.c3fdc416.css",
-    "main.js": "/degress-progress-tracker/static/js/main.96af6391.js",
-    "static/js/453.825386d9.chunk.js": "/degress-progress-tracker/static/js/453.825386d9.chunk.js",
-    "index.html": "/degress-progress-tracker/index.html",
-    "main.c3fdc416.css.map": "/degress-progress-tracker/static/css/main.c3fdc416.css.map",
-    "main.96af6391.js.map": "/degress-progress-tracker/static/js/main.96af6391.js.map",
-    "453.825386d9.chunk.js.map": "/degress-progress-tracker/static/js/453.825386d9.chunk.js.map"
+    "main.css": "/degree-progress-tracker/static/css/main.c3fdc416.css",
+    "main.js": "/degree-progress-tracker/static/js/main.aad4763a.js",
+    "static/js/453.825386d9.chunk.js": "/degree-progress-tracker/static/js/453.825386d9.chunk.js",
+    "index.html": "/degree-progress-tracker/index.html",
+    "main.c3fdc416.css.map": "/degree-progress-tracker/static/css/main.c3fdc416.css.map",
+    "main.aad4763a.js.map": "/degree-progress-tracker/static/js/main.aad4763a.js.map",
+    "453.825386d9.chunk.js.map": "/degree-progress-tracker/static/js/453.825386d9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c3fdc416.css",
-    "static/js/main.96af6391.js"
+    "static/js/main.aad4763a.js"
   ]
 }
