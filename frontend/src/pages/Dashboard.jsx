@@ -114,7 +114,6 @@ function StudentHero({
                     <div className={`progress-fill ${getProgressColorClass(overallPercent)}`} style={{ width: `${overallPercent}%` }} />
                 </div>
                 <a href="https://registrar.yorku.ca/graduation/apply" className="convocation-link">Apply for Convocation</a>
-                <br />
                 <button className="signout-button" onClick={onLogout}>Sign out</button>
             </div>
         </section>
