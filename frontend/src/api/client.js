@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://127.0.0.1:8000"
+    baseURL: process.env.REACT_APP_API_URL || "http://127.0.0.1:8000"
 });
 
 API.interceptors.request.use((config) => {
@@ -26,6 +26,19 @@ export const registerUser = async (userData) => {
 
 export const getCurrentUser = async () => {
     const response = await API.get("/auth/me");
+    return response.data;
+};
+
+export const requestPasswordReset = async (email) => {
+    const response = await API.post("/auth/password-reset/request", { email });
+    return response.data;
+};
+
+export const confirmPasswordReset = async (resetToken, newPassword) => {
+    const response = await API.post("/auth/password-reset/confirm", {
+        reset_token: resetToken,
+        new_password: newPassword,
+    });
     return response.data;
 };
 

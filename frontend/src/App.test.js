@@ -1,8 +1,26 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { fireEvent, render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("opens password recovery from the sign-in page", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole("link", { name: /forgot your password/i }));
+
+  expect(
+    screen.getByRole("heading", { name: /forgot your password/i })
+  ).toBeInTheDocument();
+});
+
+test("renders the reset page for an unprefixed reset link", () => {
+  window.history.pushState(
+    {},
+    "",
+    "/reset-password?token=test-reset-token"
+  );
+
+  render(<App />);
+
+  expect(
+    screen.getByRole("heading", { name: /choose a new password/i })
+  ).toBeInTheDocument();
 });

@@ -1,1 +1,1 @@
-from app.models.user import User    # Makes the model discoverable to SQLAlchemy when creating tables or running migrations
+"""Domain models used by the degree progress service."""

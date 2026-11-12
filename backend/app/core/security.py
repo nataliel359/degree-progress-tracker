@@ -1,15 +1,15 @@
 import os
 from datetime import datetime, timedelta, timezone
 
+from bson import ObjectId
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from sqlalchemy.orm import Session
+from pymongo.database import Database
 
 from app.db.database import get_db
-from app.models.user import User
 
 load_dotenv()
 
@@ -33,8 +33,10 @@ def create_access_token(data: dict) -> str:
     return jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
 
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
-) -> User: 
+def get_current_user(
+    token: str = Depends(oauth2_scheme),
+    db: Database = Depends(get_db),
+) -> dict:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -43,13 +45,13 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 
     try:
         payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
-        user_id: int = payload.get("sub")
-        if user_id is None:
+        user_id = payload.get("sub")
+        if not isinstance(user_id, str) or not ObjectId.is_valid(user_id):
             raise credentials_exception
     except JWTError:
         raise credentials_exception
     
-    user = db.query(User).filter(User.id == int(user_id)).first()
+    user = db["users"].find_one({"_id": ObjectId(user_id)})
 
     if user is None:
         raise credentials_exception

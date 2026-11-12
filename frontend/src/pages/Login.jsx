@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import "../styles/Login.css";
 
 export default function Login() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { login } = useAuth();
 
     const [email, setEmail] = useState("");
@@ -36,7 +37,8 @@ export default function Login() {
                 </p>
 
                 <form className="form" onSubmit={handleSubmit}>
-                    {error && <p className="error">{error}</p>}
+                    {location.state?.message && <p className="success" role="status">{location.state.message}</p>}
+                    {error && <p className="error" role="alert">{error}</p>}
 
                     <label htmlFor="email">Email</label>
                     <div className="input-shell">
@@ -64,6 +66,7 @@ export default function Login() {
 
                     <button type="submit">Sign In</button>
                 </form>
+                <p className="form-footer"><Link to="/forgot-password">Forgot your password?</Link></p>
             </section>
         </main>
     );
